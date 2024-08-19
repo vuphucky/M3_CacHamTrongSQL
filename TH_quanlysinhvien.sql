@@ -61,7 +61,7 @@ values(1,"CF",5,1),
 
 insert into mark(SubId, StudentId, Mark, Examtime)
 values(1,1,8,1),
-(1,2,10,2),
+(1,2,10mark,2),
 (2,1,12,1);
 
 select *
@@ -154,4 +154,17 @@ join mark m  on s.StudentID = m.StudentID
 group by s.StudentName, s.StudentID
 having avg(Mark) >= all(select avg(Mark) from mark group by mark.StudentID);
 
+select SubName, max(Credit) 
+from subject
+group by SubName;
 
+select s.SubName, max(m.Mark)
+from subject s
+join mark m on s.SubID = m.SubID
+group by s.SubName; 
+
+select student.*, avg(mark.Mark) as "diem trung binh"
+from student
+join mark on student.StudentID = mark.StudentID
+group by student.StudentID
+order by avg(mark.Mark) desc;
